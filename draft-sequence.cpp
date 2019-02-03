@@ -24,8 +24,9 @@ class Sequence
         int bpm;
         float ronde;
         int resolution_mesure;
-        // int pas[];
-        int pas[16] = {220,220,220,0,220,0,0,0,220,220,220,0,220,0,0,0};
+        int * pas;
+        // int pas = int[];
+        // int pas[16] = {220,220,220,0,220,0,0,0,220,220,220,0,220,0,0,0};
 
         void jouer() const;
 };
@@ -50,16 +51,16 @@ void Sequence::jouer() const
 
 // ------------------------------------------------ //
 // ----- Utilisation de la classe en contexte ----- //
-// Sequence *nom*(*Tempo*, *Resolution de la mesure, nombre de pas*);
 // ------------------------------------------------ //
 
-Sequence sequence1(128, 16);
+Sequence sequence1(128, 8);
 
 void setup()
 {
     // Ici on compose
-    // sequence1.pas = {220,0,220,0,220,0,220,0};
-    
+    sequence1.pas = new int[sequence1.resolution_mesure]{110,0,220,0,110,0,220,0};
+
+    // double * arr = new double[3]{1,2,3};
     led1.allume();
     attendre(1*1000);
     led1.eteint();
