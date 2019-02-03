@@ -4,6 +4,7 @@
 
 Led led1;
 Bouton button1;
+Bouton button2;
 Son speaker1;
 
 void action(int note,float duree)
@@ -25,10 +26,9 @@ class Sequence
         float ronde;
         int resolution_mesure;
         int * pas;
-        // int pas = int[];
-        // int pas[16] = {220,220,220,0,220,0,0,0,220,220,220,0,220,0,0,0};
 
         void jouer() const;
+        void composer();
 };
 Sequence::Sequence(int tempo, int resolution)
 {
@@ -48,17 +48,23 @@ void Sequence::jouer() const
         }
     }
 }
+void Sequence::composer()
+{
+    // pas = new int[]{};
+}
 
 // ------------------------------------------------ //
 // ----- Utilisation de la classe en contexte ----- //
 // ------------------------------------------------ //
 
 Sequence sequence1(128, 8);
+Sequence sequence2(128, 16);
 
 void setup()
 {
     // Ici on compose
     sequence1.pas = new int[sequence1.resolution_mesure]{110,0,220,0,110,0,220,0};
+    sequence2.pas = new int[sequence2.resolution_mesure]{110,110,220,0,110,0,220,0,110,220,220,0,110,0,220,0};
 
     // double * arr = new double[3]{1,2,3};
     led1.allume();
@@ -71,5 +77,9 @@ void loop()
     if (button1.aEteAppuye()) {
         // Ici on joue notre séquence une fois
         sequence1.jouer();
+    }
+    if (button2.aEteAppuye()) {
+        // Ici on joue notre séquence une fois
+        sequence2.jouer();
     }
 }
