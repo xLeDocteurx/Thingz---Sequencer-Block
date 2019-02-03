@@ -5,6 +5,7 @@
 Led led1;
 Bouton button1;
 Bouton button2;
+Bouton button3;
 Son speaker1;
 
 void action(int note,float duree)
@@ -33,7 +34,7 @@ class Sequence
 Sequence::Sequence(int tempo, int resolution)
 {
     bpm = tempo;
-    ronde = (tempo/60)*1000;
+    ronde = tempo/60*1000;
     resolution_mesure = resolution;
     // pas = int pas[resolution];
 }
@@ -68,6 +69,9 @@ int tempo = 128;
 Sequence sequence1(tempo, 4);
 Sequence sequence2(tempo, 8);
 Sequence sequence3(tempo, 16);
+Sequence sequence4(tempo, 16);
+Sequence sequence5(tempo, 16);
+Sequence sequence6(tempo, 16);
 
 void setup()
 {
@@ -76,10 +80,25 @@ void setup()
     sequence1.pas = new int[sequence1.resolution_mesure]{196,174.61,196,196};
     sequence2.pas = new int[sequence2.resolution_mesure]{196,196,196,0,
                                                         196,196,196,0};
-    sequence3.pas = new int[sequence3.resolution_mesure]{293.66,293.66,293.66,293.66,
+    sequence3.pas = new int[sequence3.resolution_mesure]{293.66,293.66,293.66,0,
                                                         293.66,349.23,0,293.66,
                                                         0,293.66,587.33,0,
-                                                        0,0,698.46,698.46
+                                                        0,698.46,698.46,0
+    };
+    sequence4.pas = new int[sequence4.resolution_mesure]{349.23,349.23,392,392,
+                                                        392,392,392,349.23,
+                                                        349.23,392,392,392,
+                                                        392,0,0,0
+    };
+    sequence5.pas = new int[sequence5.resolution_mesure]{293.66,293.66,293.66,0,
+                                                        293.66,587.33,0,293.66,
+                                                        0,293.66,587.33,0,
+                                                        0,0,0,0
+    };
+    sequence6.pas = new int[sequence6.resolution_mesure]{293.66,293.66,587.33,0,
+                                                        293.66,293.66,587.33,0,
+                                                        293.66,293.66,587.33,0,
+                                                        293.66,293.66,587.33,0
     };
 
     // double * arr = new double[3]{1,2,3};
@@ -91,17 +110,21 @@ void setup()
 void loop()
 {
     if (button1.aEteAppuye()) {
-        // Ici on joue notre séquence une fois
         sequence1.jouer();
         sequence2.jouer();
         sequence2.jouer();
         sequence2.jouer();
     }
     if (button2.aEteAppuye()) {
-        // Ici on joue notre séquence une fois
         sequence3.jouer();
         sequence3.jouer();
         sequence3.jouer();
+        sequence4.jouer();
+    }
+    if (button3.aEteAppuye()) {
+        sequence5.jouer();
+        sequence5.jouer();
         sequence3.jouer();
+        sequence6.jouer();
     }
 }
