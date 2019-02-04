@@ -34,7 +34,8 @@ class Sequence
 Sequence::Sequence(int tempo, int resolution)
 {
     bpm = tempo;
-    ronde = tempo/60*1000;
+    // ronde = 60/bpm*4*1000;
+    ronde = bpm/60*1000;
     resolution_mesure = resolution;
     // pas = int pas[resolution];
 }
@@ -43,7 +44,7 @@ void Sequence::jouer() const
     for(int i = 0; i < resolution_mesure; i++)
     {
         if (pas[i] > 0){
-            action(pas[i], ronde/resolution_mesure);
+            action(pas[i]/2, ronde/resolution_mesure);
         } else {
             attendre(ronde/resolution_mesure);
         }
@@ -64,14 +65,15 @@ void Sequence::composer(int * composition)
 // ----- Utilisation de la classe en contexte ----- //
 // ------------------------------------------------ //
 
-int tempo = 128;
+// int tempo = 128;
+int global_tempo = 120;
 
-Sequence sequence1(tempo, 4);
-Sequence sequence2(tempo, 8);
-Sequence sequence3(tempo, 16);
-Sequence sequence4(tempo, 16);
-Sequence sequence5(tempo, 16);
-Sequence sequence6(tempo, 16);
+Sequence sequence1(global_tempo, 4);
+Sequence sequence2(global_tempo, 8);
+Sequence sequence3(global_tempo, 16);
+Sequence sequence4(global_tempo, 16);
+Sequence sequence5(global_tempo, 16);
+Sequence sequence6(global_tempo, 16);
 
 void setup()
 {
@@ -103,7 +105,9 @@ void setup()
 
     // double * arr = new double[3]{1,2,3};
     led1.allume();
+    speaker1.sonne(440);
     attendre(1*1000);
+    speaker1.arreteDeSonner();
     led1.eteint();
 }
 
